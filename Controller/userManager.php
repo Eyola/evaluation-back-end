@@ -25,7 +25,7 @@ class UserManager
         $req->bindValue(':first_name', $user->getFirstName());
         $req->bindValue(':last_name', $user->getLastName());
         $req->bindValue(':email', $user->getEmail());
-        $req->bindValue(':password', $user->getPassword());
+        $req->bindValue(':password', password_hash($user->getPassword(), PASSWORD_BCRYPT));
         $req->bindValue(':cv', $user->getCv());
         $req->bindValue(':business', $user->getBusiness());
         $req->bindValue(':address', $user->getAddress());
