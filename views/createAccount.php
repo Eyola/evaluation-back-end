@@ -13,7 +13,7 @@ require_once '../Controller/statusManager.php';
 $statusManager = new StatusManager();
 $listStatus = $statusManager->getStatusForRegister();
 
-/*$userManager = new UserManager();
+$userManager = new UserManager();
 if ($_POST) {
     $firstName = $_POST["firstName"];
     $lastName = $_POST["lastName"];
@@ -39,7 +39,8 @@ if ($_POST) {
         echo $e->getMessage();
         echo 'L\'enregistrement à échoué';
     }
-}*/
+}
+
 ?>
 
 <form method="post" class="container">
@@ -60,9 +61,9 @@ if ($_POST) {
         <?php
         foreach ($listStatus as $status) {
             ?>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="statusId" id="candidat">
-                <label class="form-check-label" for="candidat">
+            <div class="form-check status">
+                <input class="form-check-input" type="radio" name="statusId" value="<?= $status->getId() ?>" id="<?= $status->getStatus_name() ?>">
+                <label class="form-check-label" for="<?= $status->getId() ?>">
                     <?= $status->getStatus_name() ?>
                 </label>
             </div>
@@ -71,17 +72,21 @@ if ($_POST) {
         ?>
     </fieldset>
 
-    <label class="form-label" for="cv">CV</label>
-    <input type="text" name="cv" id="cv" class="form-control">
+    <div hidden class="cv">
+        <label class="form-label" for="cv">CV</label>
+        <input type="text" name="cv" id="cv" class="form-control" >
+    </div>
 
+    <div hidden class="business">
     <label class="form-label" for="business">Entreprise</label>
-    <input type="text" name="business" id="business" class="form-control">
+    <input type="text" name="business" id="business" class="form-control"  >
+    </div>
 
+    <div hidden  class="address">
     <label class="form-label" for="address">Adresse</label>
-    <input type="text" name="address" id="address" class="form-control">
+    <input type="text" name="address" id="address" class="form-control" >
+    </div>
 
-
-
-
-    <input type="submit" value="S'inscrire" class="btn btn-success mt-3">
+    <input type="submit" value="S'inscrire" class="btn btn-success mt-3 btn-inscription" hidden>
 </form>
+<script src="../JS/createUser.js"></script>
