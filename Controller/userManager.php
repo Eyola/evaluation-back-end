@@ -33,6 +33,20 @@ class UserManager
         $req->execute();
     }
 
+    public function connectUser(string $email, string $password)
+    {
+    $req = $this->db->prepare("SELECT * FROM user WHERE email = :email");
+    $req->bindValue(':email', $email, PDO::PARAM_STR);
+    if ($req->execute()) {
+        $user = $req->fetch(PDO::FETCH_ASSOC);
+        if (password_verify($password, $user["password"])) {
+            echo 'Bonjour' . ' ' . $user["first_name"] . ' ' . $user["last_name"];
+        } else {
+            echo 'Identifiants invalides';
+        }
+    }
+    }
+
     public function showUsers()
     {
         $users = [];
