@@ -12,7 +12,6 @@ require_once '../Controller/statusManager.php';
 
 $statusManager = new StatusManager();
 $listStatus = $statusManager->getStatusForRegister();
-
 $userManager = new UserManager();
 if ($_POST) {
     $firstName = $_POST["firstName"];
