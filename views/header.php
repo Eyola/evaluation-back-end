@@ -10,7 +10,7 @@
                     <a class="nav-link text-light" aria-current="page" href="../views/createAccount.php">Créer un compte</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" aria-current="page" href="../views/customer.php">Connexion</a>
+                    <a class="nav-link text-light" aria-current="page" href="../views/userConnect.php">Connexion</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  text-light" href="#">Gestion de compte</a>
