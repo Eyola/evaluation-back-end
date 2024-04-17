@@ -35,8 +35,8 @@ class Status
         return $this->status_name;
     }
 
-    public function setStatus_name(string $statusName): void
+    public function setStatus_Name(string $status_name): void
     {
-        $this->status_name = $statusName;
+        $this->status_name = $status_name;
     }
 }

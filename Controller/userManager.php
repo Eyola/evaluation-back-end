@@ -32,4 +32,23 @@ class UserManager
         $req->bindValue(':status_id', $user->getStatusId());
         $req->execute();
     }
+
+    public function showUsers()
+    {
+        $users = [];
+        $req = $this->db->query("SELECT id, first_name AS firstName, last_name AS lastName, email, cv, business, address, status_id AS statusId, approved FROM user ORDER BY last_name");
+        $datas = $req->fetchAll();
+        foreach ($datas as $data) {
+            $user = new User($data);
+            $users[] = $user;
+        } return $users;
+    }
+
+    public function changeApproved(int $id, string $approved)
+    {
+        echo 'methode changeApproved appelée';
+        $req = $this->db->prepare("UPDATE user SET approved = '$approved' WHERE id = $id");
+        $req->execute();
+    }
+
 }

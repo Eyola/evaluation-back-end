@@ -22,7 +22,7 @@
                     <a class="nav-link text-light" href="#">Gerer les annonces</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Gerer les utilisateurs</a>
+                    <a class="nav-link text-light" href="../views/accountManagement.php">Gerer les utilisateurs</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="#">Voir les annonces</a>

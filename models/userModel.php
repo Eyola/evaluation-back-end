@@ -13,6 +13,7 @@ class User
     private string $business;
     private string $address;
     private string $statusId;
+    private string $approved;
 
     public function __construct(array $data)
     {
@@ -117,6 +118,16 @@ class User
     public function setAddress(string $address): void
     {
         $this->address = $address;
+    }
+
+    public function getApproved(): string
+    {
+        return $this->approved;
+    }
+
+    public function setApproved(string $approved): void
+    {
+        $this->approved = $approved;
     }
 
 

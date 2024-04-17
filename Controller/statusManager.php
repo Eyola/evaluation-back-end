@@ -34,5 +34,12 @@ class StatusManager
         return $status;
     }
 
+    public function getStatusFromId(int $id)
+    {
+        $req = $this->db->query("SELECT * FROM status WHERE id = $id");
+        $datas = $req->fetch();
+        $status = new Status($datas);
+        return $status->getStatus_name();
+    }
 
 }
