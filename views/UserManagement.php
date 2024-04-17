@@ -31,7 +31,7 @@ if ($_POST) {
 
 ?>
 
-<div class="container">
+<div class="container show-users">
     <form method="post">5
         <table class="table usersTable">
             <thead>

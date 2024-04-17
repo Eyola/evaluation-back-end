@@ -50,7 +50,7 @@ class UserManager
     public function showUsers()
     {
         $users = [];
-        $req = $this->db->query("SELECT id, first_name AS firstName, last_name AS lastName, email, cv, business, address, status_id AS statusId, approved FROM user ORDER BY last_name");
+        $req = $this->db->query("SELECT id, first_name AS firstName, last_name AS lastName, email, status_id AS statusId, approved FROM user ORDER BY last_name");
         $datas = $req->fetchAll();
         foreach ($datas as $data) {
             $user = new User($data);
@@ -62,6 +62,18 @@ class UserManager
     {
         echo 'methode changeApproved appelée';
         $req = $this->db->prepare("UPDATE user SET approved = '$approved' WHERE id = $id");
+        $req->execute();
+    }
+
+    public function addConsultant(User $user)
+    {
+        $req = $this->db->prepare("INSERT INTO user (first_name, last_name, email, password, status_id, approved) VALUES (:first_name, :last_name, :email, :password, :status_id, :approved)");
+        $req->bindValue(':first_name', $user->getFirstName());
+        $req->bindValue(':last_name', $user->getLastName());
+        $req->bindValue(':email', $user->getEmail());
+        $req->bindValue(':password', password_hash($user->getPassword(), PASSWORD_BCRYPT));
+        $req->bindValue(':status_id', 3);
+        $req->bindValue(":approved", 'Oui');
         $req->execute();
     }
 
