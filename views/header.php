@@ -4,7 +4,7 @@
 require_once '../Controller/userManager.php';
 
 $userManager = new UserManager();
-
+var_dump($_SESSION);
 ?>
 <body>
     <div class="container-fluid">

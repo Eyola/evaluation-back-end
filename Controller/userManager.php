@@ -1,4 +1,6 @@
-<?php
+<?php /** @noinspection ALL */
+/** @noinspection PhpUndefinedConstantInspection */
+/** @noinspection ALL */
 
 require_once '../models/userModel.php';
 
@@ -36,9 +38,10 @@ class UserManager
         $user = $req->fetch(PDO::FETCH_ASSOC);
         if (password_verify($password, $user["password"])) {
             echo 'Bonjour' . ' ' . $user["first_name"] . ' ' . $user["last_name"];
-            $_SESSION['email'] = $user["email"];
-            $_SESSION['firstName'] = $user["first_name"];
-            $_SESSION['lastName'] = $user["last_name"];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['firstName'] = $user['first_name'];
+            $_SESSION['lastName'] = $user['last_name'];
+            $_SESSION['id'] = $user['id'];
             if ($user['status_id'] == 1) {
                 $_SESSION['status'] = 'Recruteur';
             } else if ($user['status_id'] == 2) {
@@ -93,6 +96,7 @@ class UserManager
         $req->bindValue(':cv', $user->getCv());
         $req->bindValue(':business', $user->getBusiness());
         $req->bindValue(':address', $user->getAddress());
+        $_SESSION['firstName'] = $user->getFirstName();
         $req->execute();
     }
 

@@ -13,31 +13,64 @@ require_once '../Controller/statusManager.php';
 $statusManager = new StatusManager();
 $listStatus = $statusManager->getStatusForRegister();
 $userManager = new UserManager();
+
 if ($_POST) {
-    var_dump($_POST);
+    $id = $_SESSION['id'];
     $firstName = $_POST["firstName"];
     $lastName = $_POST["lastName"];
-    $cv = $_POST["cv"];
+
+    if ($_SESSION['status'] == 'Candidat') {
+        $cv = $_FILES['cv']['name'];
+        $address = '';
+        $business = '';
+        try {
+            if (!$_FILES['cv']['type'] == 'application/pdf') {
+                echo 'Le fichier doit être en PDF.';
+            } else {
+                $user = new User([
+                    "id" => $id,
+                    "firstName" => $firstName,
+                    "lastName" => $lastName,
+                    "cv" => $cv,
+                    "business" => $business,
+                    "address" => $address,
+                ]);
+                $userManager->updatePrivate($user);
+
+                $uploadDir = '../img/cv/';
+                $uploadFile = $uploadDir . basename($_FILES['cv']['name']);
+                move_uploaded_file($_FILES['cv']['tmp_name'], $uploadFile);
+            }
+            echo "<meta http-equiv='refresh' content='0'>";
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            echo 'L\'enregistrement à échoué';
+        }
+    }
+    else if ($_SESSION['status'] == 'Recruteur') {
     $business = $_POST["business"];
     $address = $_POST["address"];
-    try {
+    $cv = '';
+    }
+try {
         $user = new User([
+            "id" => $id,
             "firstName" => $firstName,
             "lastName" => $lastName,
-            "cv" => $cv,
             "business" => $business,
             "address" => $address,
-        ]);
-        $userManager->addUser($user);
+            "cv" => $cv,
+            ]);
+        $userManager->updatePrivate($user);
+        echo "<meta http-equiv='refresh' content='0'>";
     } catch (PDOException $e) {
         echo $e->getMessage();
-        echo 'L\'enregistrement à échoué';
-    }
 }
-
+    //echo "<meta http-equiv='refresh' content='0'>";
+}
 ?>
 
-<div method="post" class="container w-25">
+<form method="post" enctype="multipart/form-data" class="container w-25">
     <div class="d-flex flex-column"
     <label class="form-label" for="firstName">Prénom</label>
     <input type="text" name="firstName" id="firstName" class="form-control">
@@ -45,28 +78,17 @@ if ($_POST) {
     <label class="form-label" for="lastName">Nom</label>
     <input type="text" name="lastName" id="lastName" class="form-control">
 
-    <fieldset>
-        <legend>Profil</legend>
-        <?php
-        foreach ($listStatus as $status) {
-            ?>
-            <div class="form-check status">
-                <input class="form-check-input" type="radio" name="statusId" value="<?= $status->getId() ?>" id="<?= $status->getStatus_name() ?>">
-                <label class="form-check-label" for="<?= $status->getId() ?>">
-                    <?= $status->getStatus_name() ?>
-                </label>
-            </div>
-            <?php
+    <?php
+        if ($_SESSION['status'] == 'Candidat') {
+            echo
+            '<div class="cv">
+                <label class="form-label" for="cv">CV</label>
+                <input type="file" name="cv" id="cv" class="form-control" >
+            </div>';
         }
-        ?>
-    </fieldset>
-
-    <div class="cv">
-        <label class="form-label" for="cv">CV</label>
-        <input type="text" name="cv" id="cv" class="form-control" >
-    </div>
-
-    <div  class="business">
+        else if ($_SESSION['status'] == 'Recruteur') {
+            echo
+                '<div  class="business">
     <label class="form-label" for="business">Entreprise</label>
     <input type="text" name="business" id="business" class="form-control"  >
     </div>
@@ -74,9 +96,14 @@ if ($_POST) {
     <div   class="address">
     <label class="form-label" for="address">Adresse</label>
     <input type="text" name="address" id="address" class="form-control" >
-    </div>
+    </div>';
+        }
+    ?>
+
+
+
+
 
     <input type="submit" value="Accepter les modifications" class="btn btn-success mt-3 btn-inscription">
-    </div>
-</form>
+    </form>
 <script src="../JS/createUser.js"></script>

@@ -44,11 +44,6 @@ if ($_POST) {
 ?>
 
 <form method="post" class="container w-25">
-<!--    <label class="form-label" for="firstName">Prénom</label>-->
-<!--    <input type="text" name="firstName" id="firstName" class="form-control">-->
-<!---->
-<!--    <label class="form-label" for="lastName">Nom</label>-->
-<!--    <input type="text" name="lastName" id="lastName" class="form-control">-->
 
     <label class="form-label" for="email">Email</label>
     <input type="email" name="email" id="email" class="form-control">
