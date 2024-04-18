@@ -15,7 +15,6 @@ $listUsers = $userManager->showUsers();
 $statusManager = new StatusManager();
 
 if ($_POST) {
-var_dump($_POST);
     $firstName = $_POST["firstName"];
     $lastName = $_POST["lastName"];
     $email = $_POST["email"];

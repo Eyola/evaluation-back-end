@@ -14,23 +14,24 @@ $statusManager = new StatusManager();
 $listStatus = $statusManager->getStatusForRegister();
 $userManager = new UserManager();
 if ($_POST) {
-    $firstName = $_POST["firstName"];
-    $lastName = $_POST["lastName"];
+    var_dump($_POST);
+#    $firstName = $_POST["firstName"];
+#    $lastName = $_POST["lastName"];
     $email = $_POST["email"];
     $password = $_POST["password"];
-    $cv = $_POST["cv"];
-    $business = $_POST["business"];
-    $address = $_POST["address"];
+#    $cv = $_POST["cv"];
+#    $business = $_POST["business"];
+#    $address = $_POST["address"];
     $statusId = $_POST["statusId"];
     try {
         $user = new User([
-            "firstName" => $firstName,
-            "lastName" => $lastName,
+#            "firstName" => $firstName,
+#            "lastName" => $lastName,
             "email" => $email,
             "password" => $password,
-            "cv" => $cv,
-            "business" => $business,
-            "address" => $address,
+#            "cv" => $cv,
+#            "business" => $business,
+#            "address" => $address,
             "statusId" => $statusId,
         ]);
         $userManager->addUser($user);
@@ -42,12 +43,12 @@ if ($_POST) {
 
 ?>
 
-<form method="post" class="container">
-    <label class="form-label" for="firstName">Prénom</label>
-    <input type="text" name="firstName" id="firstName" class="form-control">
-
-    <label class="form-label" for="lastName">Nom</label>
-    <input type="text" name="lastName" id="lastName" class="form-control">
+<form method="post" class="container w-25">
+<!--    <label class="form-label" for="firstName">Prénom</label>-->
+<!--    <input type="text" name="firstName" id="firstName" class="form-control">-->
+<!---->
+<!--    <label class="form-label" for="lastName">Nom</label>-->
+<!--    <input type="text" name="lastName" id="lastName" class="form-control">-->
 
     <label class="form-label" for="email">Email</label>
     <input type="email" name="email" id="email" class="form-control">
@@ -71,21 +72,21 @@ if ($_POST) {
         ?>
     </fieldset>
 
-    <div hidden class="cv">
-        <label class="form-label" for="cv">CV</label>
-        <input type="text" name="cv" id="cv" class="form-control" >
-    </div>
+<!--    <div hidden class="cv">-->
+<!--        <label class="form-label" for="cv">CV</label>-->
+<!--        <input type="text" name="cv" id="cv" class="form-control" >-->
+<!--    </div>-->
+<!---->
+<!--    <div hidden class="business">-->
+<!--    <label class="form-label" for="business">Entreprise</label>-->
+<!--    <input type="text" name="business" id="business" class="form-control"  >-->
+<!--    </div>-->
+<!---->
+<!--    <div hidden  class="address">-->
+<!--    <label class="form-label" for="address">Adresse</label>-->
+<!--    <input type="text" name="address" id="address" class="form-control" >-->
+<!--    </div>-->
 
-    <div hidden class="business">
-    <label class="form-label" for="business">Entreprise</label>
-    <input type="text" name="business" id="business" class="form-control"  >
-    </div>
-
-    <div hidden  class="address">
-    <label class="form-label" for="address">Adresse</label>
-    <input type="text" name="address" id="address" class="form-control" >
-    </div>
-
-    <input type="submit" value="S'inscrire" class="btn btn-success mt-3 btn-inscription" hidden>
+    <input type="submit" value="S'inscrire" class="btn btn-success mt-3 btn-inscription">
 </form>
 <script src="../JS/createUser.js"></script>

@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $password = $_POST['password'];
         try {
             $userConnect = $userManager->connectUser($email, $password);
+            header('location:' . '../views/index.php');
     } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -23,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-<form method="post" class="d-flex justify-content-evenly">
-    <div class="w-25 d-flex flex-column">
+<form method="post" class="container w-25">
+    <div class="d-flex flex-column">
         <label class=" form-label" for="email">Email</label>
         <input type="email" name="email" id="email" class="form-control">
 
