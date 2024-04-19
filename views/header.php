@@ -38,7 +38,7 @@ var_dump($_SESSION);
                         if ($_SESSION['status'] == 'Recruteur') {
                             echo
                             '<li class="nav-item">
-                            <a class="nav-link  text-light" href="#">Publier une annonce</a>
+                            <a class="nav-link  text-light" href="../views/createAnnounce.php">Publier une annonce</a>
                             </li>';
                         }
                         else if ($_SESSION['status'] == 'Consultant') {
